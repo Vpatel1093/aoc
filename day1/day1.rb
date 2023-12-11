@@ -20,7 +20,7 @@ STR_TO_INT_HASH = {
   'ten'   => 10
 }
 
-def day_1_part_1
+def part_1
     sum = 0
 
     INPUTS.each do |input|
@@ -34,7 +34,7 @@ def day_1_part_1
     return sum
 end
 
-def day_1_part_2
+def part_2
     sum = 0
 
     INPUTS.each do |input|
@@ -75,5 +75,5 @@ def day_1_part_2
     return sum
 end
 
-puts day_1_part_1
-puts day_1_part_2
+puts part_1
+puts part_2
