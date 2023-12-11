@@ -11,14 +11,19 @@ File.open('input.txt', 'r') do |file|
     end
 end
 
-def part_1
-    sum = 0
+def day_2
     good_games = Set.new
+    power = 0
     
     INPUTS.each_with_index do |game, index|
         game = game.split(": ")[1]
         subgames = game.split(";")
         impossible_to_play = false
+        min_game_cube_counts = {
+            "red" => 0,
+            "green" => 0,
+            "blue" => 0
+        }
 
         subgames.each do |subgame|
             game_cubes_as_strings = subgame.split(", ")
@@ -41,14 +46,22 @@ def part_1
             if game_cube_counts.any? { |color, count| count > CUBES[color] }
                 impossible_to_play = true
             end
+
+            game_cube_counts.each do |color, count|
+                if count > min_game_cube_counts[color]
+                    min_game_cube_counts[color] = count
+                end
+            end
         end
+
+        power += min_game_cube_counts.values.reduce(:*)
         
         next if impossible_to_play == true
-
         good_games.add(index + 1)
     end
 
-    return good_games.sum
+    puts good_games.sum
+    puts power
 end
 
-puts part_1
+day_2
