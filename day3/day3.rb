@@ -26,14 +26,11 @@ def day_3_part_1
             new_y = y + y_change
 
             if new_x >= 0 && new_x < x_length && new_y >= 0 && new_y < y_length && INPUTS[new_y][new_x].match?(/\d/)
-                engine = discover_integer(new_y, new_x)
-                engines << engine
-                sum += engine
+                sum += discover_integer(new_y, new_x)
             end
         end
     end
     
-    puts engines
     puts sum
 end
 
