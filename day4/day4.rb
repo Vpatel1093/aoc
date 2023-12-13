@@ -16,9 +16,28 @@ def day_4_part_1(file_name)
     puts total_card_points
 end
 
-# def day_4_part_2(file_name)
-    
-# end
+def day_4_part_2(file_name)
+    winning_number_sets, card_number_sets = get_number_sets(file_name)
+    card_counts = Array.new(card_number_sets.length, 1)
+
+    winning_number_sets.each_with_index do |winning_number_set, i|
+        winning_number_count = 0
+
+        card_number_sets[i].each do |number|
+            winning_number_count += 1 if winning_number_set.include?(number)
+        end
+
+        if winning_number_count > 0
+            winning_number_count.times do |count|
+                unless card_counts[i + 1 + count].nil?
+                    card_counts[i + 1 + count] += card_counts[i]
+                end
+            end
+        end
+    end
+
+    puts card_counts.sum
+end
 
 def get_number_sets(file_name)
     winning_number_sets = []
@@ -43,5 +62,5 @@ end
 
 day_4_part_1("example.txt")
 day_4_part_1("input.txt")
-# day_4_part_2("example.txt")
-# day_4_part_2("input.txt")
+day_4_part_2("example.txt")
+day_4_part_2("input.txt")
