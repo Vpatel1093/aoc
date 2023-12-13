@@ -7,7 +7,7 @@ def day_3_part_1(file_name)
     x_length = inputs[0].length
     y_length = inputs.length
 
-    symbol_coords = get_symbol_coords(inputs)
+    symbol_coords = get_special_coords(inputs, type = "symbols")
 
     symbol_coords.each do |coordinates|
         y, x = coordinates
@@ -33,7 +33,7 @@ def day_3_part_2(file_name)
     y_length = inputs.length
     gear_ratios = 0
 
-    gear_coords = get_gear_coords(inputs)
+    gear_coords = get_special_coords(inputs, type = "gears")
 
     gear_coords.each do |coordinates|
         y, x = coordinates
@@ -72,32 +72,22 @@ def set_up_inputs_array(file_name)
     return inputs
 end
 
-def get_symbol_coords(inputs)
-    symbol_coords = Set.new
+def get_special_coords(inputs, type)
+    coords = Set.new
 
     inputs.each_with_index do |line, y|
         line.each_with_index do |char, x|
-            unless char.match?(/\d|\./)
-                symbol_coords.add([y, x])
+            if type == "symbols" && !char.match?(/\d|\./)
+                coords.add([y, x])
+            end
+
+            if type == "gears" && char.match?(/\*/)
+                coords.add([y, x])
             end
         end
     end
 
-    return symbol_coords
-end
-
-def get_gear_coords(inputs)
-    gear_coords = Set.new
-
-    inputs.each_with_index do |line, y|
-        line.each_with_index do |char, x|
-            if char.match?(/\*/)
-                gear_coords.add([y, x])
-            end
-        end
-    end
-
-    return gear_coords
+    return coords
 end
 
 def discover_integer(y, x, inputs, mask_after_discovery = false)
