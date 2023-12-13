@@ -3,11 +3,7 @@ def day_4_part_1(file_name)
     total_card_points = 0
 
     winning_number_sets.each_with_index do |winning_number_set, i|
-        winning_number_count = 0
-
-        card_number_sets[i].each do |number|
-            winning_number_count += 1 if winning_number_set.include?(number)
-        end
+        winning_number_count = (winning_number_set & card_number_sets[i]).length
 
         card_points = winning_number_count == 0 ? 0 : 2**(winning_number_count - 1)
         total_card_points += card_points
@@ -21,11 +17,7 @@ def day_4_part_2(file_name)
     card_counts = Array.new(card_number_sets.length, 1)
 
     winning_number_sets.each_with_index do |winning_number_set, i|
-        winning_number_count = 0
-
-        card_number_sets[i].each do |number|
-            winning_number_count += 1 if winning_number_set.include?(number)
-        end
+        winning_number_count = (winning_number_set & card_number_sets[i]).length
 
         if winning_number_count > 0
             winning_number_count.times do |count|
