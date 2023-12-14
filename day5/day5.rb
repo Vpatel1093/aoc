@@ -105,12 +105,12 @@ def find_intersection_range_and_handle_leftovers(current_range, mapping_range, c
         intersection_range = current_range
     elsif current_range.first < mapping_range.first && mapping_range.last < current_range.last
         # current range is encompassing mapping range <--cr--<-mr->--cr--> which leaves two leftover ranges
+        intersection_range = (mapping_range.first..mapping_range.last)
+        
         current_range_first_leftover = (current_range.first..mapping_range.first - 1)
         current_range_second_leftover = (mapping_range.last + 1..current_range.last)
         current_ranges << current_range_first_leftover
         current_ranges << current_range_second_leftover
-        
-        intersection_range = (mapping_range.first..mapping_range.last)
     elsif current_range.first < mapping_range.first && current_range.last <= mapping_range.last
         # current range partially covered by mapping range <-cr-<-mr/cr->(-mr-)> so one leftover range
         # mapping range can share end with cr as well <-cr-<-mr/cr->>
