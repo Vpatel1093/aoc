@@ -1,4 +1,4 @@
-def day_6_part_1(file_name)
+def day_6(file_name)
     race_data = get_race_data(file_name)
 
     combinations = 1
@@ -22,10 +22,6 @@ def day_6_part_1(file_name)
     puts combinations
 end
 
-# def day_6_part_2(file_name)
-    
-# end
-
 def get_race_data(file_name)
     race_data = []
 
@@ -38,7 +34,7 @@ def get_race_data(file_name)
     return race_data
 end
 
-day_6_part_1("example.txt")
-day_6_part_1("input.txt")
-# day_6_part_2("example.txt")
-# day_6_part_2("input.txt")
+day_6("example.txt")
+day_6("input.txt")
+day_6("example_without_kerning.txt")
+day_6("input_without_kerning.txt")
