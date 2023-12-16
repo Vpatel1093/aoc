@@ -1,4 +1,4 @@
-def day_8(file_name, extrapolate_backwards)
+def day_9(file_name, extrapolate_backwards)
     sequences = get_sequences(file_name)
     extrapolation_total = 0
 
@@ -39,7 +39,7 @@ def get_sequences(file_name)
     return sequences
 end
 
-day_8("example.txt", true)
-day_8("input.txt", true)
-day_8("example.txt", false)
-day_8("input.txt", false)
+day_9("example.txt", true)
+day_9("input.txt", true)
+day_9("example.txt", false)
+day_9("input.txt", false)
