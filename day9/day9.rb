@@ -1,6 +1,6 @@
-def day_8_part_1(file_name)
+def day_8(file_name, extrapolate_backwards)
     sequences = get_sequences(file_name)
-    sum_of_sequence_ends = 0
+    extrapolation_total = 0
 
     sequences.each do |sequence|
         sequence_pyramid = [sequence]
@@ -13,17 +13,18 @@ def day_8_part_1(file_name)
     
         pyramid_height = sequence_pyramid.length
         (pyramid_height - 1).times do |index|
-            sequence_pyramid[pyramid_height - index - 2] <<  sequence_pyramid[pyramid_height - index - 2].last + sequence_pyramid[pyramid_height - index - 1].last
+            if extrapolate_backwards
+                sequence_pyramid[pyramid_height - index - 2] <<  sequence_pyramid[pyramid_height - index - 2].last + sequence_pyramid[pyramid_height - index - 1].last
+            else
+                sequence_pyramid[pyramid_height - index - 2].unshift(sequence_pyramid[pyramid_height - index - 2].first - sequence_pyramid[pyramid_height - index - 1].first)
+            end
         end
     
-        sum_of_sequence_ends += sequence_pyramid.first.last
+        extrapolation_total += extrapolate_backwards ? sequence_pyramid.first.last : sequence_pyramid.first.first
     end
 
-    puts sum_of_sequence_ends
+    puts extrapolation_total
 end
-
-# def day_8_part_2(file_name)
-# end
 
 def get_sequences(file_name)
     sequences = []
@@ -38,7 +39,7 @@ def get_sequences(file_name)
     return sequences
 end
 
-day_8_part_1("example.txt")
-day_8_part_1("input.txt")
-# day_8_part_2("example.txt")
-# day_8_part_2("input.txt")
+day_8("example.txt", true)
+day_8("input.txt", true)
+day_8("example.txt", false)
+day_8("input.txt", false)
