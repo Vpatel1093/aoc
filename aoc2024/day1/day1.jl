@@ -27,8 +27,28 @@ module day1
 
         return sum
     end
+
+    function part2(file_path::String)
+        a, b = create_arrays_from_file(file_path)
+
+        sum = 0
+        hashMap = Dict{Int64, Int64}()
+        for i in eachindex(a)
+            if !haskey(hashMap, a[i])
+                hashMap[a[i]] = count(x -> x == a[i], b)
+            end
+
+            sum += a[i] * hashMap[a[i]]
+        end
+
+        return sum
+    end
 end
 
 print(day1.part1("example.txt"))
 print("\n")
 print(day1.part1("input.txt"))
+print("\n")
+print(day1.part2("example.txt"))
+print("\n")
+print(day1.part2("input.txt"))
